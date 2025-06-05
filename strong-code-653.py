@@ -35,21 +35,24 @@ def multiplicacion_matricial(m1, m2):
 st.set_page_config(layout="wide")
 st.title("🔢 Calculadora de Matrices - George Losada")
 
-filas = st.sidebar.number_input("Filas de A", 1, 10, value=3)
-columnas = st.sidebar.number_input("Columnas de A", 1, 10, value=3)
+filas = st.sidebar.number_input("Número de filas", 1, 10, value=3)
+columnas = st.sidebar.number_input("Número de columnas", 1, 10, value=3)
 
 if "A_df" not in st.session_state or st.session_state["A_df"].shape != (filas, columnas):
-    df = pd.DataFrame(np.zeros((filas, columnas), dtype=int))
-    st.session_state["A_df"] = df
+    st.session_state["A_df"] = pd.DataFrame(np.zeros((filas, columnas), dtype=int))
+
+if "B_df" not in st.session_state or st.session_state["B_df"].shape != (filas, columnas):
+    st.session_state["B_df"] = pd.DataFrame(np.zeros((filas, columnas), dtype=int))
 
 st.subheader("🔧 Matriz A - Personalizada")
 A_df = st.data_editor(st.session_state["A_df"], num_rows="dynamic", use_container_width=True)
 A = A_df.to_numpy()
 st.session_state["A_df"] = A_df
 
-if "B" not in st.session_state or st.session_state["B"].shape != (filas, columnas):
-    st.session_state["B"] = np.random.randint(100, 201, size=(filas, columnas))
-B = st.session_state["B"]
+st.subheader("🔧 Matriz B - Personalizada")
+B_df = st.data_editor(st.session_state["B_df"], num_rows="dynamic", use_container_width=True)
+B = B_df.to_numpy()
+st.session_state["B_df"] = B_df
 
 opcion = st.sidebar.selectbox("Seleccione una operación:", [
     "Ver matrices A y B",
@@ -62,14 +65,13 @@ opcion = st.sidebar.selectbox("Seleccione una operación:", [
     "Mayor valor de A",
     "Suma total de A",
     "Promedio de A",
-    "Multiplicación matricial",
-    "Reiniciar B"
+    "Multiplicación matricial"
 ])
 
 if opcion == "Ver matrices A y B":
     st.subheader("Matriz A")
     st.dataframe(A)
-    st.subheader("Matriz B (aleatoria)")
+    st.subheader("Matriz B")
     st.dataframe(B)
 
 elif opcion == "Producto por escalar":
@@ -113,12 +115,8 @@ elif opcion == "Promedio de A":
 
 elif opcion == "Multiplicación matricial":
     if A.shape[1] != B.shape[0]:
-        st.warning("La multiplicación matricial A * B no es posible. Las dimensiones no coinciden.")
+        st.warning("No se puede multiplicar: columnas de A distintas de filas de B.")
     else:
         resultado = multiplicacion_matricial(A, B)
-        st.write("Multiplicación matricial A * B:")
+        st.write("A * B (matricial):")
         st.dataframe(resultado)
-
-elif opcion == "Reiniciar B":
-    st.session_state["B"] = np.random.randint(100, 201, size=(filas, columnas))
-    st.success("Matriz B reinicializada.")
