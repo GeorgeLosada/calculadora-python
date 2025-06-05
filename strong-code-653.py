@@ -1,11 +1,6 @@
 import streamlit as st
 import numpy as np
-
-TAM = 20
-
-# Funciones de matriz
-def inicializar_matriz():
-    return np.random.randint(100, 201, size=(TAM, TAM))
+import pandas as pd
 
 def producto_por_escalar(matriz, escalar):
     return matriz * escalar
@@ -37,20 +32,25 @@ def promedio_matriz(matriz):
 def multiplicacion_matricial(m1, m2):
     return np.dot(m1, m2)
 
-# Streamlit App
 st.set_page_config(layout="wide")
 st.title("🔢 Calculadora de Matrices - George Losada")
 
-# Inicialización de matrices si no existen en sesión
-if 'A' not in st.session_state:
-    st.session_state['A'] = inicializar_matriz()
-if 'B' not in st.session_state:
-    st.session_state['B'] = inicializar_matriz()
+filas = st.sidebar.number_input("Filas de A", 1, 10, value=3)
+columnas = st.sidebar.number_input("Columnas de A", 1, 10, value=3)
 
-A = st.session_state['A']
-B = st.session_state['B']
+if "A_df" not in st.session_state or st.session_state["A_df"].shape != (filas, columnas):
+    df = pd.DataFrame(np.zeros((filas, columnas), dtype=int))
+    st.session_state["A_df"] = df
 
-# Sidebar con opciones
+st.subheader("🔧 Matriz A - Personalizada")
+A_df = st.data_editor(st.session_state["A_df"], num_rows="dynamic", use_container_width=True)
+A = A_df.to_numpy()
+st.session_state["A_df"] = A_df
+
+if "B" not in st.session_state or st.session_state["B"].shape != (filas, columnas):
+    st.session_state["B"] = np.random.randint(100, 201, size=(filas, columnas))
+B = st.session_state["B"]
+
 opcion = st.sidebar.selectbox("Seleccione una operación:", [
     "Ver matrices A y B",
     "Producto por escalar",
@@ -63,42 +63,41 @@ opcion = st.sidebar.selectbox("Seleccione una operación:", [
     "Suma total de A",
     "Promedio de A",
     "Multiplicación matricial",
-    "Reiniciar matrices"
+    "Reiniciar B"
 ])
 
-# Operaciones
 if opcion == "Ver matrices A y B":
     st.subheader("Matriz A")
     st.dataframe(A)
-    st.subheader("Matriz B")
+    st.subheader("Matriz B (aleatoria)")
     st.dataframe(B)
 
 elif opcion == "Producto por escalar":
-    escalar = st.sidebar.number_input("Ingrese escalar distinto de 0", value=2)
-    if escalar == 0:
-        st.error("El escalar no puede ser 0.")
-    else:
-        resultado = producto_por_escalar(A, escalar)
-        st.write(f"Matriz A multiplicada por {escalar}:")
-        st.dataframe(resultado)
+    escalar = st.sidebar.number_input("Ingrese escalar", value=2)
+    resultado = producto_por_escalar(A, escalar)
+    st.write(f"Matriz A * {escalar}:")
+    st.dataframe(resultado)
 
 elif opcion == "Suma de matrices":
     resultado = suma_matrices(A, B)
-    st.write("Suma de A + B:")
+    st.write("A + B:")
     st.dataframe(resultado)
 
 elif opcion == "Resta de matrices":
     resultado = resta_matrices(A, B)
-    st.write("Resta de A - B:")
+    st.write("A - B:")
     st.dataframe(resultado)
 
 elif opcion == "Multiplicación elemento a elemento":
     resultado = multiplicacion_elemento(A, B)
-    st.write("Multiplicación A * B (elemento a elemento):")
+    st.write("A * B (elemento a elemento):")
     st.dataframe(resultado)
 
 elif opcion == "Suma diagonal de A":
-    st.write(f"Suma de la diagonal principal de A: {suma_diagonal(A)}")
+    if A.shape[0] == A.shape[1]:
+        st.write(f"Suma de la diagonal de A: {suma_diagonal(A)}")
+    else:
+        st.warning("La matriz A no es cuadrada.")
 
 elif opcion == "Menor valor de A":
     st.write(f"Menor valor en A: {menor_valor(A)}")
@@ -113,11 +112,13 @@ elif opcion == "Promedio de A":
     st.write(f"Promedio de A: {promedio_matriz(A)}")
 
 elif opcion == "Multiplicación matricial":
-    resultado = multiplicacion_matricial(A, B)
-    st.write("Multiplicación matricial A * B:")
-    st.dataframe(resultado)
+    if A.shape[1] != B.shape[0]:
+        st.warning("La multiplicación matricial A * B no es posible. Las dimensiones no coinciden.")
+    else:
+        resultado = multiplicacion_matricial(A, B)
+        st.write("Multiplicación matricial A * B:")
+        st.dataframe(resultado)
 
-elif opcion == "Reiniciar matrices":
-    st.session_state['A'] = inicializar_matriz()
-    st.session_state['B'] = inicializar_matriz()
-    st.success("Matrices reinicializadas.")
+elif opcion == "Reiniciar B":
+    st.session_state["B"] = np.random.randint(100, 201, size=(filas, columnas))
+    st.success("Matriz B reinicializada.")
