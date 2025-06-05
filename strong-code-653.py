@@ -45,12 +45,12 @@ if "B_df" not in st.session_state or st.session_state["B_df"].shape != (filas, c
     st.session_state["B_df"] = pd.DataFrame(np.zeros((filas, columnas), dtype=int))
 
 st.subheader("🔧 Matriz A - Personalizada")
-A_df = st.data_editor(st.session_state["A_df"], num_rows="dynamic", use_container_width=True)
+A_df = st.data_editor(st.session_state["A_df"], num_rows="dynamic", use_container_width=True, key="editor_a")
 A = A_df.to_numpy()
 st.session_state["A_df"] = A_df
 
 st.subheader("🔧 Matriz B - Personalizada")
-B_df = st.data_editor(st.session_state["B_df"], num_rows="dynamic", use_container_width=True)
+B_df = st.data_editor(st.session_state["B_df"], num_rows="dynamic", use_container_width=True, key="editor_b")
 B = B_df.to_numpy()
 st.session_state["B_df"] = B_df
 
