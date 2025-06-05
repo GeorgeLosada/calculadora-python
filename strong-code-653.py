@@ -1,59 +1,123 @@
 import streamlit as st
+import numpy as np
 
-def calcular_pasaje(dias):
-    return 3200 * dias
+TAM = 20
 
-def cuanto_alcanza(plata):
-    pasajes = plata // 3200
-    sobra = plata % 3200
-    return pasajes, sobra
+# Funciones de matriz
+def inicializar_matriz():
+    return np.random.randint(100, 201, size=(TAM, TAM))
 
-def calcular_imc(peso, altura):
-    return peso / (altura ** 2)
+def producto_por_escalar(matriz, escalar):
+    return matriz * escalar
 
-def calcular_grasa(edad, sexo, imc):
-    if sexo == "Masculino":
-        return 1.20 * imc + 0.23 * edad - 16.2
+def suma_matrices(m1, m2):
+    return m1 + m2
+
+def resta_matrices(m1, m2):
+    return m1 - m2
+
+def multiplicacion_elemento(m1, m2):
+    return m1 * m2
+
+def suma_diagonal(matriz):
+    return np.trace(matriz)
+
+def menor_valor(matriz):
+    return matriz.min()
+
+def mayor_valor(matriz):
+    return matriz.max()
+
+def suma_total(matriz):
+    return matriz.sum()
+
+def promedio_matriz(matriz):
+    return int(matriz.mean())
+
+def multiplicacion_matricial(m1, m2):
+    return np.dot(m1, m2)
+
+# Streamlit App
+st.set_page_config(layout="wide")
+st.title("🔢 Calculadora de Matrices - George Losada")
+
+# Inicialización de matrices si no existen en sesión
+if 'A' not in st.session_state:
+    st.session_state['A'] = inicializar_matriz()
+if 'B' not in st.session_state:
+    st.session_state['B'] = inicializar_matriz()
+
+A = st.session_state['A']
+B = st.session_state['B']
+
+# Sidebar con opciones
+opcion = st.sidebar.selectbox("Seleccione una operación:", [
+    "Ver matrices A y B",
+    "Producto por escalar",
+    "Suma de matrices",
+    "Resta de matrices",
+    "Multiplicación elemento a elemento",
+    "Suma diagonal de A",
+    "Menor valor de A",
+    "Mayor valor de A",
+    "Suma total de A",
+    "Promedio de A",
+    "Multiplicación matricial",
+    "Reiniciar matrices"
+])
+
+# Operaciones
+if opcion == "Ver matrices A y B":
+    st.subheader("Matriz A")
+    st.dataframe(A)
+    st.subheader("Matriz B")
+    st.dataframe(B)
+
+elif opcion == "Producto por escalar":
+    escalar = st.sidebar.number_input("Ingrese escalar distinto de 0", value=2)
+    if escalar == 0:
+        st.error("El escalar no puede ser 0.")
     else:
-        return 1.20 * imc + 0.23 * edad - 5.4
+        resultado = producto_por_escalar(A, escalar)
+        st.write(f"Matriz A multiplicada por {escalar}:")
+        st.dataframe(resultado)
 
+elif opcion == "Suma de matrices":
+    resultado = suma_matrices(A, B)
+    st.write("Suma de A + B:")
+    st.dataframe(resultado)
 
-tabs = st.tabs(["Calculadora de Pasajes", "IMC", "% Grasa Corporal"])
+elif opcion == "Resta de matrices":
+    resultado = resta_matrices(A, B)
+    st.write("Resta de A - B:")
+    st.dataframe(resultado)
 
-with tabs[0]:
-    st.header("Calculadora de Pasajes")
-    opcion = st.radio("¿Sabe los días o el dinero?", ("días", "dinero"))
+elif opcion == "Multiplicación elemento a elemento":
+    resultado = multiplicacion_elemento(A, B)
+    st.write("Multiplicación A * B (elemento a elemento):")
+    st.dataframe(resultado)
 
-    if opcion == "días":
-        dias = st.number_input("Número de días", min_value=1, step=1)
-        ida_vuelta = st.radio("¿Ida y vuelta?", ("Sí", "No"))
-        if st.button("Calcular total"):
-            total = calcular_pasaje(dias) * 2 if ida_vuelta == "Sí" else calcular_pasaje(dias)
-            st.success(f"Total a pagar: ${total}")
+elif opcion == "Suma diagonal de A":
+    st.write(f"Suma de la diagonal principal de A: {suma_diagonal(A)}")
 
-    elif opcion == "dinero":
-        dinero = st.number_input("¿Con cuánto dinero cuenta?", min_value=0, step=100)
-        if st.button("Calcular pasajes"):
-            n, sobrante = cuanto_alcanza(dinero)
-            st.success(f"Número de pasajes: {n}")
-            st.info(f"Dinero sobrante: ${sobrante}")
+elif opcion == "Menor valor de A":
+    st.write(f"Menor valor en A: {menor_valor(A)}")
 
-with tabs[1]:
-    st.header("Calculadora de IMC")
-    peso = st.number_input("Peso (kg)", min_value=0.0)
-    altura = st.number_input("Altura (m)", min_value=0.0)
-    if st.button("Calcular IMC"):
-        if altura > 0:
-            imc = calcular_imc(peso, altura)
-            st.success(f"Tu IMC es {imc:.2f}")
-        else:
-            st.error("La altura debe ser mayor que 0")
+elif opcion == "Mayor valor de A":
+    st.write(f"Mayor valor en A: {mayor_valor(A)}")
 
-with tabs[2]:
-    st.header("Calculadora de Porcentaje de Grasa Corporal")
-    edad = st.number_input("Edad", min_value=0)
-    sexo = st.radio("Sexo", ["Masculino", "Femenino"])
-    imc_grasa = st.number_input("IMC", min_value=0.0)
-    if st.button("Calcular % de grasa"):
-        grasa = calcular_grasa(edad, sexo, imc_grasa)
-        st.success(f"Porcentaje estimado de grasa corporal: {grasa:.2f}%")
+elif opcion == "Suma total de A":
+    st.write(f"Suma total de A: {suma_total(A)}")
+
+elif opcion == "Promedio de A":
+    st.write(f"Promedio de A: {promedio_matriz(A)}")
+
+elif opcion == "Multiplicación matricial":
+    resultado = multiplicacion_matricial(A, B)
+    st.write("Multiplicación matricial A * B:")
+    st.dataframe(resultado)
+
+elif opcion == "Reiniciar matrices":
+    st.session_state['A'] = inicializar_matriz()
+    st.session_state['B'] = inicializar_matriz()
+    st.success("Matrices reinicializadas.")
