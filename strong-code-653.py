@@ -1,3 +1,5 @@
+import streamlit as s
+
 def calcular_pasaje(dias):
     return 3200 * dias
     
@@ -5,6 +7,8 @@ def cuanto_alcanza(plata):
     pasajes = plata // 3200
     sobra = plata % 3200  
     return pasajes, sobra
+
+s.write("¿Sabe los días que viaja o el dinero con el que cuenta? (dias/dinero): ")
 
 tipo = input("¿Sabe los días que viaja o el dinero con el que cuenta? (dias/dinero): ").lower()
 
