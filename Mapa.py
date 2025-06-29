@@ -46,7 +46,7 @@ edificios = {
     "210 Facultad de Odontología": (430, 230),
     "311 Laboratorios de Ing. Mecánica y Eléctrica": (700, 200),
     "412 Laboratorios de Ingeniería Química": (760, 200),
-    "314 NEA (Takeuchi)": (630, 380),
+    "314 NEA": (640, 200),
 }
 
 comedores = {
