@@ -47,15 +47,18 @@ edificios = {
     "311 Laboratorios de Ing. Mecánica y Eléctrica": (700, 200),
     "412 Laboratorios de Ingeniería Química": (760, 200),
     "314 NEA (Takeuchi)": (630, 380),
-    "311 Economía": (460, 380),
 }
 
 comedores = {
+    "Comedor Derecho y Ciencias Políticas": (470, 360),
     "Comedor Plaza Che (Central)": (370, 280),
     "Comedor Matemáticas (Takeuchi)": (640, 180),
     "Comedor Hemeroteca": (840, 250),
+    "Comedor Geologia": (360, 300),
+    "Comedor Economía": (460, 380),
+    "Comedor Agrarias": (200, 400),
     "Comedor Ciencias Humanas": (360, 300),
-    "Comedor Biología": (710, 260),
+    "Comedor Biología": (200, 400),
     "Comedor Odontología": (430, 240)
 }
 
