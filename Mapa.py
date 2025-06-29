@@ -2,7 +2,7 @@ import streamlit as st
 import math
 
 # Mostrar la imagen del mapa
-st.image("mapa_unal.png", caption="Mapa UNAL Bogotá")
+st.image("maps.png", caption="Mapa UNAL Bogotá")
 
 # Lista de edificios y sus posiciones en coordenadas (x, y) relativas
 edificios = {
