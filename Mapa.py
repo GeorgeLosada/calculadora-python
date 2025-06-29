@@ -25,6 +25,7 @@ edificios = {
     "217 Diseño Gráfico": (410, 250),
     "238 Posgrados Económicas": (420, 320),
     "310 Ciencias Económicas": (450, 350),
+    "201 Facultad de Derecho y Ciencias Políticas": (470, 360),
 
     # Aulas importantes
     "401 Facultad de Ingeniería": (620, 220),
@@ -37,10 +38,16 @@ edificios = {
     "451 Química": (760, 320),
     "453 Aulas de Ingeniería": (780, 330),
     "454 Ciencia y Tecnología": (800, 350),
-    "471 Medicina": (680, 310),
     "476 Facultad de Ciencias": (670, 330),
+    "471 Medicina": (680, 310),
     "500 Agrarias": (200, 400),
     "503 Medicina Veterinaria": (220, 420),
+    "564 Gloria Galeano (Aulas de Ciencias)": (780, 370),
+    "210 Facultad de Odontología": (430, 230),
+    "311 Laboratorios de Ing. Mecánica y Eléctrica": (700, 200),
+    "412 Laboratorios de Ingeniería Química": (760, 200),
+    "314 NEA (Takeuchi)": (630, 380),
+    "311 Economía": (460, 380),
 }
 
 comedores = {
