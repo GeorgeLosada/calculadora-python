@@ -42,7 +42,7 @@ edificios = {
     "471 Medicina": (680, 310),
     "500 Agrarias": (200, 400),
     "503 Medicina Veterinaria": (220, 420),
-    "564 Gloria Galeano (Aulas de Ciencias)": (780, 370),
+    "564 Gloria Galeano (Aulas de Ciencias)": (250, 390),
     "210 Facultad de Odontología": (430, 230),
     "311 Laboratorios de Ing. Mecánica y Eléctrica": (700, 200),
     "412 Laboratorios de Ingeniería Química": (760, 200),
