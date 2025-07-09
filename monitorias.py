@@ -198,7 +198,7 @@ def filtrar_monitorias(materia_seleccionada, dia_seleccionado, hora_seleccionada
     return filtro
 
 # Interfaz de usuario
-st.title("📚 Monitorías de Matemáticas UNAL")
+st.title("Monitorías del Departamento de Matemáticas UNAL")
 st.subheader("Consulta disponibilidad de tutorías")
 
 # Obtener opciones únicas
