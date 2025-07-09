@@ -2,13 +2,160 @@ import streamlit as st
 import pandas as pd
 from datetime import time
 
-# Datos de las monitorías
+# Datos completos de monitorías por materia
 monitorias = [
-    {"Materia": "ÁLGEBRA LINEAL", "Día": "LUNES", "Hora Inicio": time(7,0), "Hora Fin": time(8,0), "Monitor": "Vega Camacho Juan David (POSG) 405-317"},
-    {"Materia": "ÁLGEBRA LINEAL", "Día": "LUNES", "Hora Inicio": time(8,0), "Hora Fin": time(9,0), "Monitor": "Vega Camacho Juan David (POSG) 405-317"},
-    {"Materia": "ÁLGEBRA LINEAL", "Día": "LUNES", "Hora Inicio": time(9,0), "Hora Fin": time(10,0), "Monitor": "Aguiar Reina Luis Alejandro (405-317)"},
-    # ... (todos los datos completos van aquí)
-    {"Materia": "SISTEMAS NUMÉRICOS", "Día": "VIERNES", "Hora Inicio": time(15,0), "Hora Fin": time(16,0), "Monitor": "Cipagauta Cultiva Gustavo Daver (POSG) 405-317"}
+    # Álgebra Lineal
+    {"Materia": "Álgebra Lineal", "Día": "LUNES", "Hora Inicio": time(7,0), "Hora Fin": time(8,0)},
+    {"Materia": "Álgebra Lineal", "Día": "LUNES", "Hora Inicio": time(8,0), "Hora Fin": time(9,0)},
+    {"Materia": "Álgebra Lineal", "Día": "LUNES", "Hora Inicio": time(9,0), "Hora Fin": time(10,0)},
+    {"Materia": "Álgebra Lineal", "Día": "LUNES", "Hora Inicio": time(10,0), "Hora Fin": time(11,0)},
+    {"Materia": "Álgebra Lineal", "Día": "LUNES", "Hora Inicio": time(11,0), "Hora Fin": time(12,0)},
+    {"Materia": "Álgebra Lineal", "Día": "LUNES", "Hora Inicio": time(12,0), "Hora Fin": time(13,0)},
+    {"Materia": "Álgebra Lineal", "Día": "LUNES", "Hora Inicio": time(15,0), "Hora Fin": time(16,0)},
+    {"Materia": "Álgebra Lineal", "Día": "LUNES", "Hora Inicio": time(16,0), "Hora Fin": time(17,0)},
+    
+    {"Materia": "Álgebra Lineal", "Día": "MARTES", "Hora Inicio": time(7,0), "Hora Fin": time(8,0)},
+    {"Materia": "Álgebra Lineal", "Día": "MARTES", "Hora Inicio": time(8,0), "Hora Fin": time(9,0)},
+    {"Materia": "Álgebra Lineal", "Día": "MARTES", "Hora Inicio": time(14,0), "Hora Fin": time(15,0)},
+    {"Materia": "Álgebra Lineal", "Día": "MARTES", "Hora Inicio": time(15,0), "Hora Fin": time(16,0)},
+    {"Materia": "Álgebra Lineal", "Día": "MARTES", "Hora Inicio": time(16,0), "Hora Fin": time(17,0)},
+    {"Materia": "Álgebra Lineal", "Día": "MARTES", "Hora Inicio": time(17,0), "Hora Fin": time(18,0)},
+    
+    {"Materia": "Álgebra Lineal", "Día": "MIERCOLES", "Hora Inicio": time(7,0), "Hora Fin": time(8,0)},
+    {"Materia": "Álgebra Lineal", "Día": "MIERCOLES", "Hora Inicio": time(8,0), "Hora Fin": time(9,0)},
+    {"Materia": "Álgebra Lineal", "Día": "MIERCOLES", "Hora Inicio": time(9,0), "Hora Fin": time(10,0)},
+    {"Materia": "Álgebra Lineal", "Día": "MIERCOLES", "Hora Inicio": time(10,0), "Hora Fin": time(11,0)},
+    {"Materia": "Álgebra Lineal", "Día": "MIERCOLES", "Hora Inicio": time(11,0), "Hora Fin": time(12,0)},
+    {"Materia": "Álgebra Lineal", "Día": "MIERCOLES", "Hora Inicio": time(12,0), "Hora Fin": time(13,0)},
+    {"Materia": "Álgebra Lineal", "Día": "MIERCOLES", "Hora Inicio": time(14,0), "Hora Fin": time(15,0)},
+    {"Materia": "Álgebra Lineal", "Día": "MIERCOLES", "Hora Inicio": time(15,0), "Hora Fin": time(16,0)},
+    
+    {"Materia": "Álgebra Lineal", "Día": "JUEVES", "Hora Inicio": time(7,0), "Hora Fin": time(8,0)},
+    {"Materia": "Álgebra Lineal", "Día": "JUEVES", "Hora Inicio": time(8,0), "Hora Fin": time(9,0)},
+    {"Materia": "Álgebra Lineal", "Día": "JUEVES", "Hora Inicio": time(9,0), "Hora Fin": time(10,0)},
+    {"Materia": "Álgebra Lineal", "Día": "JUEVES", "Hora Inicio": time(10,0), "Hora Fin": time(11,0)},
+    {"Materia": "Álgebra Lineal", "Día": "JUEVES", "Hora Inicio": time(14,0), "Hora Fin": time(15,0)},
+    {"Materia": "Álgebra Lineal", "Día": "JUEVES", "Hora Inicio": time(15,0), "Hora Fin": time(16,0)},
+    
+    {"Materia": "Álgebra Lineal", "Día": "VIERNES", "Hora Inicio": time(7,0), "Hora Fin": time(8,0)},
+    {"Materia": "Álgebra Lineal", "Día": "VIERNES", "Hora Inicio": time(8,0), "Hora Fin": time(9,0)},
+    {"Materia": "Álgebra Lineal", "Día": "VIERNES", "Hora Inicio": time(11,0), "Hora Fin": time(12,0)},
+    {"Materia": "Álgebra Lineal", "Día": "VIERNES", "Hora Inicio": time(12,0), "Hora Fin": time(13,0)},
+    
+    # Cálculo Diferencial
+    {"Materia": "Cálculo Diferencial", "Día": "MARTES", "Hora Inicio": time(7,0), "Hora Fin": time(8,0)},
+    {"Materia": "Cálculo Diferencial", "Día": "MARTES", "Hora Inicio": time(8,0), "Hora Fin": time(9,0)},
+    {"Materia": "Cálculo Diferencial", "Día": "MIERCOLES", "Hora Inicio": time(9,0), "Hora Fin": time(10,0)},
+    {"Materia": "Cálculo Diferencial", "Día": "MIERCOLES", "Hora Inicio": time(10,0), "Hora Fin": time(11,0)},
+    {"Materia": "Cálculo Diferencial", "Día": "MIERCOLES", "Hora Inicio": time(11,0), "Hora Fin": time(12,0)},
+    {"Materia": "Cálculo Diferencial", "Día": "JUEVES", "Hora Inicio": time(7,0), "Hora Fin": time(8,0)},
+    {"Materia": "Cálculo Diferencial", "Día": "JUEVES", "Hora Inicio": time(8,0), "Hora Fin": time(9,0)},
+    {"Materia": "Cálculo Diferencial", "Día": "VIERNES", "Hora Inicio": time(9,0), "Hora Fin": time(10,0)},
+    {"Materia": "Cálculo Diferencial", "Día": "VIERNES", "Hora Inicio": time(17,0), "Hora Fin": time(18,0)},
+    {"Materia": "Cálculo Diferencial", "Día": "VIERNES", "Hora Inicio": time(18,0), "Hora Fin": time(19,0)},
+    {"Materia": "Cálculo Diferencial", "Día": "MARTES", "Hora Inicio": time(14,0), "Hora Fin": time(15,0)},
+    {"Materia": "Cálculo Diferencial", "Día": "MARTES", "Hora Inicio": time(15,0), "Hora Fin": time(16,0)},
+    {"Materia": "Cálculo Diferencial", "Día": "JUEVES", "Hora Inicio": time(14,0), "Hora Fin": time(15,0)},
+    {"Materia": "Cálculo Diferencial", "Día": "JUEVES", "Hora Inicio": time(15,0), "Hora Fin": time(16,0)},
+    {"Materia": "Cálculo Diferencial", "Día": "JUEVES", "Hora Inicio": time(16,0), "Hora Fin": time(17,0)},
+    
+    # Cálculo Integral
+    {"Materia": "Cálculo Integral", "Día": "LUNES", "Hora Inicio": time(9,0), "Hora Fin": time(10,0)},
+    {"Materia": "Cálculo Integral", "Día": "LUNES", "Hora Inicio": time(10,0), "Hora Fin": time(11,0)},
+    {"Materia": "Cálculo Integral", "Día": "MARTES", "Hora Inicio": time(9,0), "Hora Fin": time(10,0)},
+    {"Materia": "Cálculo Integral", "Día": "MARTES", "Hora Inicio": time(11,0), "Hora Fin": time(12,0)},
+    {"Materia": "Cálculo Integral", "Día": "MARTES", "Hora Inicio": time(12,0), "Hora Fin": time(13,0)},
+    {"Materia": "Cálculo Integral", "Día": "MIERCOLES", "Hora Inicio": time(11,0), "Hora Fin": time(12,0)},
+    {"Materia": "Cálculo Integral", "Día": "MIERCOLES", "Hora Inicio": time(12,0), "Hora Fin": time(13,0)},
+    {"Materia": "Cálculo Integral", "Día": "JUEVES", "Hora Inicio": time(11,0), "Hora Fin": time(12,0)},
+    {"Materia": "Cálculo Integral", "Día": "JUEVES", "Hora Inicio": time(12,0), "Hora Fin": time(13,0)},
+    {"Materia": "Cálculo Integral", "Día": "VIERNES", "Hora Inicio": time(11,0), "Hora Fin": time(12,0)},
+    {"Materia": "Cálculo Integral", "Día": "VIERNES", "Hora Inicio": time(12,0), "Hora Fin": time(13,0)},
+    {"Materia": "Cálculo Integral", "Día": "LUNES", "Hora Inicio": time(14,0), "Hora Fin": time(15,0)},
+    {"Materia": "Cálculo Integral", "Día": "MIERCOLES", "Hora Inicio": time(14,0), "Hora Fin": time(15,0)},
+    {"Materia": "Cálculo Integral", "Día": "JUEVES", "Hora Inicio": time(14,0), "Hora Fin": time(15,0)},
+    {"Materia": "Cálculo Integral", "Día": "MARTES", "Hora Inicio": time(15,0), "Hora Fin": time(16,0)},
+    {"Materia": "Cálculo Integral", "Día": "MIERCOLES", "Hora Inicio": time(15,0), "Hora Fin": time(16,0)},
+    {"Materia": "Cálculo Integral", "Día": "JUEVES", "Hora Inicio": time(15,0), "Hora Fin": time(16,0)},
+    
+    # Cálculo en Varias Variables
+    {"Materia": "Cálculo en Varias Variables", "Día": "LUNES", "Hora Inicio": time(7,0), "Hora Fin": time(8,0)},
+    {"Materia": "Cálculo en Varias Variables", "Día": "LUNES", "Hora Inicio": time(8,0), "Hora Fin": time(9,0)},
+    {"Materia": "Cálculo en Varias Variables", "Día": "LUNES", "Hora Inicio": time(11,0), "Hora Fin": time(12,0)},
+    {"Materia": "Cálculo en Varias Variables", "Día": "LUNES", "Hora Inicio": time(12,0), "Hora Fin": time(13,0)},
+    {"Materia": "Cálculo en Varias Variables", "Día": "MARTES", "Hora Inicio": time(7,0), "Hora Fin": time(8,0)},
+    {"Materia": "Cálculo en Varias Variables", "Día": "MARTES", "Hora Inicio": time(8,0), "Hora Fin": time(9,0)},
+    {"Materia": "Cálculo en Varias Variables", "Día": "MARTES", "Hora Inicio": time(11,0), "Hora Fin": time(12,0)},
+    {"Materia": "Cálculo en Varias Variables", "Día": "MARTES", "Hora Inicio": time(12,0), "Hora Fin": time(13,0)},
+    {"Materia": "Cálculo en Varias Variables", "Día": "MIERCOLES", "Hora Inicio": time(7,0), "Hora Fin": time(8,0)},
+    {"Materia": "Cálculo en Varias Variables", "Día": "MIERCOLES", "Hora Inicio": time(8,0), "Hora Fin": time(9,0)},
+    {"Materia": "Cálculo en Varias Variables", "Día": "MIERCOLES", "Hora Inicio": time(9,0), "Hora Fin": time(10,0)},
+    {"Materia": "Cálculo en Varias Variables", "Día": "MIERCOLES", "Hora Inicio": time(10,0), "Hora Fin": time(11,0)},
+    {"Materia": "Cálculo en Varias Variables", "Día": "JUEVES", "Hora Inicio": time(7,0), "Hora Fin": time(8,0)},
+    {"Materia": "Cálculo en Varias Variables", "Día": "JUEVES", "Hora Inicio": time(8,0), "Hora Fin": time(9,0)},
+    {"Materia": "Cálculo en Varias Variables", "Día": "JUEVES", "Hora Inicio": time(11,0), "Hora Fin": time(12,0)},
+    {"Materia": "Cálculo en Varias Variables", "Día": "JUEVES", "Hora Inicio": time(12,0), "Hora Fin": time(13,0)},
+    {"Materia": "Cálculo en Varias Variables", "Día": "VIERNES", "Hora Inicio": time(7,0), "Hora Fin": time(8,0)},
+    {"Materia": "Cálculo en Varias Variables", "Día": "VIERNES", "Hora Inicio": time(8,0), "Hora Fin": time(9,0)},
+    {"Materia": "Cálculo en Varias Variables", "Día": "MARTES", "Hora Inicio": time(14,0), "Hora Fin": time(15,0)},
+    {"Materia": "Cálculo en Varias Variables", "Día": "JUEVES", "Hora Inicio": time(14,0), "Hora Fin": time(15,0)},
+    {"Materia": "Cálculo en Varias Variables", "Día": "VIERNES", "Hora Inicio": time(15,0), "Hora Fin": time(16,0)},
+    {"Materia": "Cálculo en Varias Variables", "Día": "MIERCOLES", "Hora Inicio": time(15,0), "Hora Fin": time(16,0)},
+    {"Materia": "Cálculo en Varias Variables", "Día": "MIERCOLES", "Hora Inicio": time(16,0), "Hora Fin": time(17,0)},
+    {"Materia": "Cálculo en Varias Variables", "Día": "MARTES", "Hora Inicio": time(16,0), "Hora Fin": time(18,0)},
+    {"Materia": "Cálculo en Varias Variables", "Día": "VIERNES", "Hora Inicio": time(16,0), "Hora Fin": time(18,0)},
+    
+    # Ecuaciones Diferenciales
+    {"Materia": "Ecuaciones Diferenciales", "Día": "MIERCOLES", "Hora Inicio": time(7,0), "Hora Fin": time(8,0)},
+    {"Materia": "Ecuaciones Diferenciales", "Día": "LUNES", "Hora Inicio": time(8,0), "Hora Fin": time(9,0)},
+    {"Materia": "Ecuaciones Diferenciales", "Día": "MIERCOLES", "Hora Inicio": time(8,0), "Hora Fin": time(9,0)},
+    {"Materia": "Ecuaciones Diferenciales", "Día": "JUEVES", "Hora Inicio": time(8,0), "Hora Fin": time(9,0)},
+    {"Materia": "Ecuaciones Diferenciales", "Día": "VIERNES", "Hora Inicio": time(8,0), "Hora Fin": time(9,0)},
+    {"Materia": "Ecuaciones Diferenciales", "Día": "MARTES", "Hora Inicio": time(9,0), "Hora Fin": time(10,0)},
+    {"Materia": "Ecuaciones Diferenciales", "Día": "MARTES", "Hora Inicio": time(10,0), "Hora Fin": time(11,0)},
+    {"Materia": "Ecuaciones Diferenciales", "Día": "LUNES", "Hora Inicio": time(11,0), "Hora Fin": time(12,0)},
+    {"Materia": "Ecuaciones Diferenciales", "Día": "MARTES", "Hora Inicio": time(11,0), "Hora Fin": time(12,0)},
+    {"Materia": "Ecuaciones Diferenciales", "Día": "MIERCOLES", "Hora Inicio": time(11,0), "Hora Fin": time(12,0)},
+    {"Materia": "Ecuaciones Diferenciales", "Día": "JUEVES", "Hora Inicio": time(11,0), "Hora Fin": time(12,0)},
+    {"Materia": "Ecuaciones Diferenciales", "Día": "LUNES", "Hora Inicio": time(12,0), "Hora Fin": time(13,0)},
+    {"Materia": "Ecuaciones Diferenciales", "Día": "MARTES", "Hora Inicio": time(12,0), "Hora Fin": time(13,0)},
+    {"Materia": "Ecuaciones Diferenciales", "Día": "MIERCOLES", "Hora Inicio": time(12,0), "Hora Fin": time(13,0)},
+    {"Materia": "Ecuaciones Diferenciales", "Día": "JUEVES", "Hora Inicio": time(12,0), "Hora Fin": time(13,0)},
+    {"Materia": "Ecuaciones Diferenciales", "Día": "LUNES", "Hora Inicio": time(14,0), "Hora Fin": time(15,0)},
+    {"Materia": "Ecuaciones Diferenciales", "Día": "MARTES", "Hora Inicio": time(14,0), "Hora Fin": time(15,0)},
+    {"Materia": "Ecuaciones Diferenciales", "Día": "MIERCOLES", "Hora Inicio": time(14,0), "Hora Fin": time(15,0)},
+    {"Materia": "Ecuaciones Diferenciales", "Día": "JUEVES", "Hora Inicio": time(15,0), "Hora Fin": time(16,0)},
+    {"Materia": "Ecuaciones Diferenciales", "Día": "JUEVES", "Hora Inicio": time(16,0), "Hora Fin": time(17,0)},
+    
+    # Fundamentos de Matemáticas
+    {"Materia": "Fundamentos de Matemáticas", "Día": "LUNES", "Hora Inicio": time(14,0), "Hora Fin": time(15,0)},
+    {"Materia": "Fundamentos de Matemáticas", "Día": "MARTES", "Hora Inicio": time(14,0), "Hora Fin": time(15,0)},
+    {"Materia": "Fundamentos de Matemáticas", "Día": "MIERCOLES", "Hora Inicio": time(14,0), "Hora Fin": time(15,0)},
+    {"Materia": "Fundamentos de Matemáticas", "Día": "JUEVES", "Hora Inicio": time(14,0), "Hora Fin": time(15,0)},
+    {"Materia": "Fundamentos de Matemáticas", "Día": "VIERNES", "Hora Inicio": time(14,0), "Hora Fin": time(15,0)},
+    {"Materia": "Fundamentos de Matemáticas", "Día": "LUNES", "Hora Inicio": time(15,0), "Hora Fin": time(16,0)},
+    {"Materia": "Fundamentos de Matemáticas", "Día": "MARTES", "Hora Inicio": time(15,0), "Hora Fin": time(16,0)},
+    {"Materia": "Fundamentos de Matemáticas", "Día": "MIERCOLES", "Hora Inicio": time(15,0), "Hora Fin": time(16,0)},
+    {"Materia": "Fundamentos de Matemáticas", "Día": "JUEVES", "Hora Inicio": time(15,0), "Hora Fin": time(16,0)},
+    {"Materia": "Fundamentos de Matemáticas", "Día": "VIERNES", "Hora Inicio": time(15,0), "Hora Fin": time(16,0)},
+    
+    # Sistemas Numéricos
+    {"Materia": "Sistemas Numéricos", "Día": "MIERCOLES", "Hora Inicio": time(7,0), "Hora Fin": time(8,0)},
+    {"Materia": "Sistemas Numéricos", "Día": "MIERCOLES", "Hora Inicio": time(8,0), "Hora Fin": time(9,0)},
+    {"Materia": "Sistemas Numéricos", "Día": "VIERNES", "Hora Inicio": time(7,0), "Hora Fin": time(8,0)},
+    {"Materia": "Sistemas Numéricos", "Día": "VIERNES", "Hora Inicio": time(8,0), "Hora Fin": time(9,0)},
+    {"Materia": "Sistemas Numéricos", "Día": "LUNES", "Hora Inicio": time(9,0), "Hora Fin": time(10,0)},
+    {"Materia": "Sistemas Numéricos", "Día": "LUNES", "Hora Inicio": time(10,0), "Hora Fin": time(11,0)},
+    {"Materia": "Sistemas Numéricos", "Día": "LUNES", "Hora Inicio": time(11,0), "Hora Fin": time(12,0)},
+    {"Materia": "Sistemas Numéricos", "Día": "MARTES", "Hora Inicio": time(11,0), "Hora Fin": time(12,0)},
+    {"Materia": "Sistemas Numéricos", "Día": "JUEVES", "Hora Inicio": time(11,0), "Hora Fin": time(12,0)},
+    {"Materia": "Sistemas Numéricos", "Día": "LUNES", "Hora Inicio": time(12,0), "Hora Fin": time(13,0)},
+    {"Materia": "Sistemas Numéricos", "Día": "MARTES", "Hora Inicio": time(12,0), "Hora Fin": time(13,0)},
+    {"Materia": "Sistemas Numéricos", "Día": "JUEVES", "Hora Inicio": time(12,0), "Hora Fin": time(13,0)},
+    {"Materia": "Sistemas Numéricos", "Día": "MIERCOLES", "Hora Inicio": time(14,0), "Hora Fin": time(15,0)},
+    {"Materia": "Sistemas Numéricos", "Día": "MIERCOLES", "Hora Inicio": time(15,0), "Hora Fin": time(16,0)},
+    {"Materia": "Sistemas Numéricos", "Día": "VIERNES", "Hora Inicio": time(15,0), "Hora Fin": time(16,0)},
+    {"Materia": "Sistemas Numéricos", "Día": "VIERNES", "Hora Inicio": time(16,0), "Hora Fin": time(17,0)},
 ]
 
 # Convertir a DataFrame
@@ -22,7 +169,7 @@ def filtrar_monitorias(materia_seleccionada, dia_seleccionado, hora_seleccionada
         filtro = filtro[filtro["Materia"] == materia_seleccionada]
     
     if dia_seleccionado != "Todos":
-        filtro = filtro[filtro["Día"] == dia_seleccionada]
+        filtro = filtro[filtro["Día"] == dia_seleccionado]
     
     if hora_seleccionada:
         hora_seleccionada = time(hora_seleccionada.hour, hora_seleccionada.minute)
@@ -48,7 +195,7 @@ with col1:
 with col2:
     dia_seleccionado = st.selectbox("Selecciona el día:", dias)
 
-hora_libre = st.time_input("¿A qué hora estás libre?", value=None)
+hora_libre = st.time_input("¿A qué hora estás libre? (Se mostrarán tutorías en curso)", value=None)
 
 # Botón de búsqueda
 if st.button("Buscar Monitorías"):
@@ -73,14 +220,21 @@ if st.button("Buscar Monitorías"):
                 axis=1
             )
             
-            st.dataframe(resultados_display[["Materia", "Día", "Horario", "Monitor"]], 
-                         hide_index=True)
+            # Mostrar solo información relevante
+            st.dataframe(resultados_display[["Materia", "Día", "Horario"]], 
+                         hide_index=True,
+                         column_config={
+                             "Materia": "Materia",
+                             "Día": "Día",
+                             "Horario": "Horario"
+                         })
 
 # Información adicional
 st.divider()
 st.markdown("""
-**Notas:**
-- Las monitorías se realizan principalmente en el salón 405-317
-- (POSG) indica monitores de posgrado
-- Los horarios pueden cambiar en días festivos
+**Información importante:**
+- Todas las monitorías se realizan en el **Salón 405-317** (excepto indicación especial)
+- Horario de atención: **Lunes a Viernes de 7:00 am a 6:00 pm**
+- En días festivos aplica horario especial (consultar en el departamento)
+- Los horarios están sujetos a cambios durante el semestre
 """)
