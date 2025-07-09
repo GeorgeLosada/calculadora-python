@@ -158,8 +158,25 @@ monitorias = [
     {"Materia": "Sistemas Numéricos", "Día": "VIERNES", "Hora Inicio": time(16,0), "Hora Fin": time(17,0)},
 ]
 
+# Función para filtrar monitorías
+monitorias = [m for m in monitorias if m["Hora Fin"] <= time(19,0)]
+
 # Convertir a DataFrame
 df = pd.DataFrame(monitorias)
+
+# Orden correcto de días
+orden_dias = ["LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES"]
+df["Día"] = pd.Categorical(df["Día"], categories=orden_dias, ordered=True)
+df = df.sort_values(["Día", "Hora Inicio"])
+
+# Función para formatear horas en AM/PM
+def formato_hora(hora):
+    if hora.hour < 12:
+        return f"{hora.hour}:{hora.minute:02d} AM"
+    elif hora.hour == 12:
+        return f"12:{hora.minute:02d} PM"
+    else:
+        return f"{hora.hour-12}:{hora.minute:02d} PM"
 
 # Función para filtrar monitorías
 def filtrar_monitorias(materia_seleccionada, dia_seleccionado, hora_seleccionada):
@@ -186,7 +203,7 @@ st.subheader("Consulta disponibilidad de tutorías")
 
 # Obtener opciones únicas
 materias = ["Todas"] + sorted(df["Materia"].unique().tolist())
-dias = ["Todos"] + sorted(df["Día"].unique().tolist())
+dias = ["Todos"] + orden_dias
 
 # Widgets de selección
 col1, col2 = st.columns(2)
@@ -195,39 +212,41 @@ with col1:
 with col2:
     dia_seleccionado = st.selectbox("Selecciona el día:", dias)
 
-hora_libre = st.time_input("¿A qué hora estás libre? (Se mostrarán tutorías en curso)", value=None)
+hora_libre = st.time_input("¿A qué hora estás libre?", 
+                          value=None,
+                          step=1800)  # Saltos de 30 minutos
 
 # Botón de búsqueda
 if st.button("Buscar Monitorías"):
-    if df.empty:
-        st.warning("No hay datos de monitorías disponibles")
+    resultados = filtrar_monitorias(
+        materia_seleccionada,
+        dia_seleccionado,
+        hora_libre
+    )
+    
+    if resultados.empty:
+        st.info("No se encontraron monitorías disponibles con esos criterios")
     else:
-        resultados = filtrar_monitorias(
-            materia_seleccionada,
-            dia_seleccionado,
-            hora_libre
+        st.success(f"📅 {len(resultados)} monitorías encontradas:")
+        
+        # Formatear resultados
+        resultados_display = resultados.copy()
+        resultados_display["Horario"] = resultados.apply(
+            lambda x: f"{formato_hora(x['Hora Inicio'])} - {formato_hora(x['Hora Fin'])}", 
+            axis=1
         )
         
-        if resultados.empty:
-            st.info("No se encontraron monitorías disponibles con esos criterios")
-        else:
-            st.success(f"📅 {len(resultados)} monitorías encontradas:")
-            
-            # Formatear resultados
-            resultados_display = resultados.copy()
-            resultados_display["Horario"] = resultados.apply(
-                lambda x: f"{x['Hora Inicio'].strftime('%H:%M')} - {x['Hora Fin'].strftime('%H:%M')}", 
-                axis=1
-            )
-            
-            # Mostrar solo información relevante
-            st.dataframe(resultados_display[["Materia", "Día", "Horario"]], 
-                         hide_index=True,
-                         column_config={
-                             "Materia": "Materia",
-                             "Día": "Día",
-                             "Horario": "Horario"
-                         })
+        # Mostrar tabla ordenada
+        st.dataframe(
+            resultados_display[["Materia", "Día", "Horario"]],
+            hide_index=True,
+            column_config={
+                "Materia": st.column_config.Column(width="medium"),
+                "Día": st.column_config.Column(width="small"),
+                "Horario": st.column_config.Column(width="medium")
+            }
+        )
+
 
 # Información adicional
 st.divider()
